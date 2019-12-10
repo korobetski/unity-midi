@@ -7,7 +7,7 @@ namespace UnityMidi
     [System.Serializable]
     public class StreamingAssetResouce : IResource
     {
-        [SerializeField] string streamingAssetPath;
+        [SerializeField] string streamingAssetPath = null;
 
         public bool ReadAllowed()
         {

@@ -361,10 +361,14 @@ namespace AudioSynthesis.Bank
                     }
                     i++;
                 }
-                MultiPatch mp = new MultiPatch(p.Name);
-                mp.LoadSf2(regionList.ToArray(), assets);
-                assets.PatchAssetList.Add(new PatchAsset(mp.Name, mp));
-                AssignPatchToBank(mp, p.BankNumber, p.PatchNumber, p.PatchNumber);
+
+                if (p.Name != "EOP") // End Of Presets, we don't need to read this
+                {
+                    MultiPatch mp = new MultiPatch(p.Name);
+                    mp.LoadSf2(regionList.ToArray(), assets);
+                    assets.PatchAssetList.Add(new PatchAsset(mp.Name, mp));
+                    AssignPatchToBank(mp, p.BankNumber, p.PatchNumber, p.PatchNumber);
+                }
             }
         }
         private Sf2Region[][] ReadSf2Instruments(Instrument[] instruments)
@@ -489,9 +493,9 @@ namespace AudioSynthesis.Bank
                 endRange = range;
             }
             if(startRange < 0 || startRange >= BankSize)
-                throw new ArgumentOutOfRangeException("startRange");
+                throw new ArgumentOutOfRangeException("startRange : "+ patch.Name+ "   "+ bankNumber);
             if (endRange < 0 || endRange >= BankSize)
-                throw new ArgumentOutOfRangeException("endRange");
+                throw new ArgumentOutOfRangeException("endRange : " + patch.Name + "   " + bankNumber);
             //create bank if necessary and load assign patches
             Patch[] patches;
             if (bank.ContainsKey(bankNumber))

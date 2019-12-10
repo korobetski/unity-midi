@@ -12,8 +12,8 @@ namespace UnityMidi
     [RequireComponent(typeof(AudioSource))]
     public class MidiPlayer : MonoBehaviour
     {
-        [SerializeField] StreamingAssetResouce bankSource;
-        [SerializeField] StreamingAssetResouce midiSource;
+        [SerializeField] StreamingAssetResouce bankSource = null;
+        [SerializeField] StreamingAssetResouce midiSource = null;
         [SerializeField] bool loadOnAwake = true;
         [SerializeField] bool playOnAwake = true;
         [SerializeField] int channel = 1;
